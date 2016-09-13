@@ -9,9 +9,6 @@ module alu_8(
 
 	wire [8:0] sub_ab;
 	wire [7:0] add_ab;
-	wire 		oflow_add;
-	wire 		oflow_sub;
-	wire 		oflow;
 
 	assign sub_ab = (a < b) ? {1'b1, a} - b : {1'b0, a - b};
 	assign add_ab = a + b;
@@ -23,8 +20,8 @@ module alu_8(
 			4'd2:  out <= a ^ b;				/* xor */
 			4'd3:  out <= a << b;			/* lsl */
 			4'd4:  out <= a >> b;			/* lsr */
-			4'd5:	 out <= {a,a} >> (4'd8-b[2:0]);  /* ror */
-			4'd6:	 out <= {a,a} >> (4'd8-b[2:0]);  /* rol */
+			4'd5:	 out <= {a,a} >> (4'd8-b[2:0]);  /* rol */
+			4'd6:	 out <= {a,a} << (4'd8-b[2:0]);  /* ror */
 			default: out <= 0;
 		endcase
 	end

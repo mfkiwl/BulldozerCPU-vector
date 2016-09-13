@@ -19,15 +19,6 @@ module alu_32(
 	assign sub_ab = (a < b) ? {1'b1, a} - b : {1'b0, a - b};
 	assign add_ab = a + b;
 
-	// overflow occurs (with 2s complement numbers) when
-	// the operands have the same sign, but the sign of the result is
-	// different.  The actual sign is the opposite of the result.
-	// It is also dependent on whether addition or subtraction is performed.
-	assign oflow_add = (a[31] == b[31] && add_ab[31] != a[31]) ? 1'b1 : 1'b0;
-	assign oflow_sub = (a[31] == b[31] && sub_ab[31] != a[31]) ? 1'b1 : 1'b0;
-
-	assign oflow = (ctl == 4'b0000) ? oflow_add : oflow_sub;
-
 	always @(*) begin
 		case (ctl)
 			4'd0:  out <= add_ab;			/* add */
@@ -36,7 +27,7 @@ module alu_32(
 			4'd3:  out <= a << b;			/* lsl */
 			4'd4:  out <= a >> b;			/* lsr */
 			4'd5:	 out <= {a,a} >> (6'd32-b[4:0]);  /* ror */
-			4'd6:	 out <= {a,a} >> (6'd32-b[4:0]);  /* rol */
+			4'd6:	 out <= {a,a} << (6'd32-b[4:0]);  /* rol */
 			default: out <= 0;
 		endcase
 	end
