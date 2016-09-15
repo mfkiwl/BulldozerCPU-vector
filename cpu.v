@@ -28,7 +28,7 @@
 `endif
 
 module cpu(
-		input wire clk, input wire [31:0] din, output wire wr_mem, output wire [18:0] mem_addr, output wire [31:0] dout);
+		input wire clk, input wire [31:0] din, output wire wr_mem, output wire [16:0] mem_addr, output wire [31:0] dout);
 
 	parameter NMEM = 20;  // number in instruction memory
 	parameter IM_DATA = "im_data.txt";
@@ -102,8 +102,7 @@ module cpu(
 	// instruction memory
 	wire [31:0] inst;
 	wire [31:0] inst_s2;
-	im #(.NMEM(NMEM), .IM_DATA(IM_DATA))
-		im1(.clk(clk), .addr(pc), .data(inst));
+	im im1(.clk(clk), .addr(pc), .data(inst));
 	regr #(.N(32)) regr_im_s2(.clk(clk),
 						.hold(stall_s1_s2), .clear(flush_s1),
 						.in(inst), .out(inst_s2));

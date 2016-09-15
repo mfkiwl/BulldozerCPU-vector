@@ -18,7 +18,7 @@ module control(
 		jump		<= 1'b0;
 
 		case (opcode)
-			5'b00000: begin	/* nop */
+			5'd0: begin	/* nop */
 				aluop[3:0]	<= 4'b0000;
 				memread	<= 1'b0;
 				memtoreg	<= 1'b0;
@@ -26,7 +26,7 @@ module control(
 				regwrite	<= 1'b0;
 				jump		<= 1'b0;
 			end
-			5'b00100: begin	/* add */
+			5'd4: begin	/* add */
 				aluop[3:0]	<= 4'b0000;
 				memread	<= 1'b0;
 				memtoreg	<= 1'b0;
@@ -34,7 +34,7 @@ module control(
 				regwrite	<= 1'b1;
 				jump		<= 1'b0;
 			end
-			5'b00110: begin	/* cmpj */
+			5'd6: begin	/* cmpj */
 				aluop[3:0]	<= 4'b0001;
 				memread	<= 1'b0;
 				memtoreg	<= 1'b0;
@@ -42,7 +42,7 @@ module control(
 				regwrite	<= 1'b1;
 				jump		<= 1'b1;
 			end
-			5'b01000: begin	/* eorv */
+			5'd2: begin	/* eor */
 				aluop[3:0]	<= 4'b0010;
 				memread	<= 1'b0;
 				memtoreg	<= 1'b0;
@@ -51,7 +51,7 @@ module control(
 				jump		<= 1'b0;
 				
 			end
-			5'b01001: begin	/* subv */
+			5'd3: begin	/* sub */
 				aluop[3:0]	<= 4'b0001;
 				memread	<= 1'b0;
 				memtoreg	<= 1'b0;
@@ -59,16 +59,7 @@ module control(
 				regwrite	<= 1'b1;
 				jump		<= 1'b0;
 			end
-			5'b01010: begin	/* addv */
-				aluop[3:0]	<= 4'b0000;
-				memread	<= 1'b0;
-				memtoreg	<= 1'b0;
-				memwrite	<= 1'b0;
-				regwrite	<= 1'b1;
-				jump		<= 1'b0;
-
-			end
-			5'b01100: begin	/* lslv */
+			5'd7: begin	/* lsl */
 				aluop[3:0]	<= 4'b0011;
 				memread	<= 1'b0;
 				memtoreg	<= 1'b0;
@@ -77,7 +68,7 @@ module control(
 				jump		<= 1'b0;
 				
 			end
-			5'b01101: begin	/* lsrv */
+			5'd8: begin	/* lsrv */
 				aluop[3:0]	<= 4'b0100;
 				memread	<= 1'b0;
 				memtoreg	<= 1'b0;
@@ -86,7 +77,7 @@ module control(
 				jump		<= 1'b0;
 				
 			end
-			5'b01110: begin	/* rorv */
+			5'd09: begin	/* rorv */
 				aluop[3:0]	<= 4'b0101;
 				memread	<= 1'b0;
 				memtoreg	<= 1'b0;
@@ -94,7 +85,7 @@ module control(
 				regwrite	<= 1'b1;
 				jump		<= 1'b0;
 			end
-			5'b01111: begin	/* rolv */
+			5'd10: begin	/* rolv */
 				aluop[3:0]	<= 4'b0110;
 				memread	<= 1'b0;
 				memtoreg	<= 1'b0;
@@ -102,7 +93,7 @@ module control(
 				regwrite	<= 1'b1;
 				jump		<= 1'b0;
 			end
-			6'b10001: begin	/* ldv */
+			5'd12: begin	/* ldv */
 				aluop[3:0]	<= 4'b0000;
 				memread	<= 1'b1;
 				memtoreg	<= 1'b1;
@@ -110,7 +101,7 @@ module control(
 				regwrite	<= 1'b0;
 				jump		<= 1'b0;
 			end
-			6'b10010: begin	/* stv */
+			5'd13: begin	/* stv */
 				aluop[3:0]	<= 4'b0000;
 				memread	<= 1'b0;
 				memtoreg	<= 1'b0;

@@ -21,22 +21,23 @@
 `ifndef _im
 `define _im
 
-module im(
-		input wire			clk,
-		input wire 	[31:0] 	addr,
-		output wire [31:0] 	data);
+module im (
+   input [11:0] addr,
+   input clk, 
+   output reg [31:0] data
+);
 
-	parameter NMEM = 128;   // Number of memory entries,
-							// not the same as the memory size
-	parameter IM_DATA = "im_data.txt";  // file to read data from
-
-	reg [31:0] mem [0:511];  // 32-bit memory with 512 entries
-
-	initial begin
-		$readmemh(IM_DATA, mem, 0, NMEM-1);
-	end
-
-	assign data = mem[addr[19:0]][31:0];
+   reg [31:0] inst_mem[(2**12)-1:0];
+   initial // Read the memory contents in the file
+           // inst_init.txt. 
+   begin
+      $readmemh("inst_init.txt", inst_mem);
+   end
+	
+   always @ (posedge clk)
+   begin
+      data <= inst_mem[addr];
+   end
 endmodule
 
 `endif

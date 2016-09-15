@@ -19,7 +19,7 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module dp_ram
-   #(parameter ADDR_WIDTH = 19,
+   #(parameter ADDR_WIDTH = 17,
                DATA_WIDTH = 32
    )
    (
@@ -52,30 +52,33 @@ module dp_ram
 	wire	[DATA_WIDTH-1:0] din_a;
 	
 //=============Output Ports Data Type==================
-	wire 	[DATA_WIDTH-1:0] dout_a;
-	wire	[DATA_WIDTH-1:0] dout_b;
+	reg 	[DATA_WIDTH-1:0] dout_a;
+	reg	[DATA_WIDTH-1:0] dout_b;
 	
 //=============Internal Variables======================
-	reg 	[DATA_WIDTH-1:0] ram [2**ADDR_WIDTH-1:0];
-   reg 	[ADDR_WIDTH-1:0] addr_a_reg, addr_b_reg;
+	(* ram_init_file = "ram_init.mif" *) reg 	[DATA_WIDTH-1:0] ram [2**ADDR_WIDTH-1:0];
 	
 //==========Code startes Here==========================
-	
-	always @(negedge clk)
-	begin
-		if (w)begin  // write operation
-				ram[addr_a] <= din_a;
-		end
-		addr_a_reg <= addr_a;
-	end
-	
-	always @(posedge clk)
-	begin
-		addr_b_reg <= addr_b;
-	end
 
-	// two read operations
-	assign dout_a = ram[addr_a_reg];
-	assign dout_b = ram[addr_b_reg];
+	// Port A
+	always @ (posedge clk)
+	begin
+		if (w) 
+		begin
+			ram[addr_a] <= din_a;
+			dout_a <= din_a;
+		end
+		else 
+		begin
+			dout_a <= ram[addr_a];
+		end
+	end
+	
+	// Port B
+	always @ (posedge clk)
+	begin
+			dout_b <= ram[addr_b];
+	end
+	
 
 endmodule
