@@ -28,6 +28,7 @@ numh			"0x"([0-9A-F])+
 ("ROLV"|"rolv")			{yyless(4); return INSTR_ROLV;}
 ("LDV"|"ldv")			{yyless(3); return INSTR_LDV;}
 ("STV"|"stv")			{yyless(3); return INSTR_STV;}
+("AND"|"and")			{yyless(3); return INSTR_AND;}
 
 {registro_esc}			{yylval.string = (char *) strdup(yytext); return REGISTER;}
 {registro_vect}			{yylval.string = (char *) strdup(yytext); return REGISTER_VECT;}

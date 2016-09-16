@@ -1,1 +1,1 @@
-¡No hay errores en el archivo test.asm!
+¡No hay errores en el archivo out.asm!
