@@ -11,7 +11,6 @@ char rd3[OPSIZE], rn3[OPSIZE], src3[OPSIZE];	// Line 3
 char rd4[OPSIZE], rn4[OPSIZE], src4[OPSIZE];	// Line 4
 char rd5[OPSIZE], rn5[OPSIZE], src5[OPSIZE];	// Line 5
 
-int line = 1;
 int ind = 0;
 
 int nops[NOPS];
@@ -41,13 +40,13 @@ void pipeline()
 	strcpy(rn2, rn3);
 	strcpy(src2, src3);
 
-	strcpy(rd3, rd4);
+	/*strcpy(rd3, rd4);
 	strcpy(rn3, rn4);
 	strcpy(src3, src4);
 
 	strcpy(rd4, rd5);
 	strcpy(rn4, rn5);
-	strcpy(src4, src5);
+	strcpy(src4, src5);*/
 }
 
 void clean(char *buffer, char *dst)
@@ -95,7 +94,7 @@ void tokenize_line(char *line, int stage)
 		buffer = strtok(NULL, " ");
 		clean(buffer, src3);
 	}
-	else if (stage == 4)
+	/*else if (stage == 4)
 	{
 		buffer = strtok(NULL, " ");
 		clean(buffer, rd4);
@@ -112,17 +111,17 @@ void tokenize_line(char *line, int stage)
 		clean(buffer, rn5);
 		buffer = strtok(NULL, " ");
 		clean(buffer, src5);
-	}
+	}*/
 	else
 	{
 		detect_risk();
 		pipeline();
 		buffer = strtok(NULL, " ");
-		clean(buffer, rd5);
+		clean(buffer, rd3);
 		buffer = strtok(NULL, " ");
-		clean(buffer, rn5);
+		clean(buffer, rn3);
 		buffer = strtok(NULL, " ");
-		clean(buffer, src5);
+		clean(buffer, src3);
 	}
 }
 

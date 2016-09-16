@@ -10,6 +10,8 @@ NOP
 ADDV R8, R8, 0xFF   
 LDV R9, [R0, 0x0]
 CMPJ R1, R2, 0x11  
+NOP
+NOP
 STV R8, [R1, 0x0]   
 ADD R1, R1, 0x01    
 CMPJ R0, R0, 0x7  
