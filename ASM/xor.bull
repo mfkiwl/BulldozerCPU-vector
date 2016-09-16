@@ -1,0 +1,26 @@
+AND R0, R0, 0x0 
+ADD R1, R0, 0x0     ;Inicio de la imagen de entrada
+ADD R2, R0, 0x6400  ;Inicio de la imagen encriptada
+ADD R3, R0, 0xC800  ;Inicio de la imagen desencriptada
+ADD R4, R0, 0x12C00 ;Fin de pantalla
+AND R5, R0, 0x0
+ADD R5, R0, 0xAC     ;Clave de encriptado
+AND R6, R6, 0x0    ;Inicializar en cero registro de lectura
+ADD R7, R2, 0x0     ;Carga dir de escritura  
+CMPJ R6, R2, 0x10   ;Salir del loop (linea 17)
+LDV R9, [R6, 0x0]   ;Carga el pxl a procesar
+EORV R9, R9, R5     ;Encripta
+STV R9, [R7, 0x0]   ;Pinto pxl encriptado
+ADD R6, R6, 0x04    ;cambio al siguiente vector en lectura
+ADD R7, R7, 0x04    ;cambio al siguiente vector en escritura
+CMPJ R0, R0, 0x9    ;loop para pintar
+ADD R6, R2, 0x0    ;Inicializar registro de lectura
+ADD R7, R3, 0x0     ;Carga dir de escritura
+CMPJ R6, R2, 0x19   ;Salir del loop
+LDV R9, [R6, 0x0]   ;Carga el pxl a procesar
+EORV R9, R9, R5     ;Desencripta
+STV R9, [R7, 0x0]   ;Pinto pxl desencriptado
+ADD R6, R6, 0x04    ;cambio al siguiente vector en lectura
+ADD R7, R7, 0x04    ;cambio al siguiente vector en escritura
+CMPJ R0, R0, 0x12   ;loop para pintar (voy a la linea 19)
+ADD R1, R1, 0x01    ; R1 = 01 indica programa finalizado correctamente.
