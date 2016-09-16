@@ -1,4 +1,5 @@
 // Created by Emanuele Giuseppe Esposito
+// Edited by OskrD
 
 import java.io.File;
 import java.io.IOException;
@@ -80,8 +81,13 @@ public class MifAdder {
                 int k = 0;
                 while(k < toAdd.length){
                     oldmifsize++;
-                    writer.println("" + oldmifsize + " : " + toAdd[k] + ";");
-                    k ++;
+					String byte0 = Integer.toHexString(Integer.parseInt(toAdd[k])).toUpperCase();    //line added
+					String byte1 = Integer.toHexString(Integer.parseInt(toAdd[k+1])).toUpperCase();  //line added
+					String byte2 = Integer.toHexString(Integer.parseInt(toAdd[k+2])).toUpperCase();  //line added
+					String byte3 = Integer.toHexString(Integer.parseInt(toAdd[k+3])).toUpperCase();  //line added					
+                    //writer.println("" + oldmifsize + " : " + toAdd[k] + ";");
+					writer.println("" + oldmifsize + " : " + byte3 + byte2 + byte1 + byte0 + ";");   //write the loop unrolling
+                    k +=4;     																         // k++;
                 }
                 if (oldmifsize < MEM_SIZE) {
                     writer.println("--finished");

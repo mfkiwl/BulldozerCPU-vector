@@ -1,0 +1,12 @@
+AND R0, R0, 0x0 
+ADD R1, R0, 0x0     ;Inicio de la imagen de entrada
+ADD R2, R0, 0x6400  ;Inicio de la imagen encriptada
+ADD R3, R0, 0xC800
+ANDV R8, R8, 0x0    ;Inicializar en cero
+ADDV R8, R8, 0xFF   ;Valor de blanco
+LDV R9, [R0, 0x0]
+CMPJ R1, R2, 0x11   ;Salir del loop
+STV R8, [R1, 0x0]   ;Pinto de blanco un pxl
+ADD R1, R1, 0x01    ;cambio al siguiente pxl
+CMPJ R0, R0, 0x7    ;loop para pintar
+ADD R1, R0, 0x0 

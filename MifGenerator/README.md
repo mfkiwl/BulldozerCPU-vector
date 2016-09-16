@@ -51,7 +51,7 @@ The file will be generated in EXAMPLE folder
 
  1. Go to step 1, 2 and 3 of the previous section
 
- 2. Write ```java mif_file_name.mif``` (this is your mif file).
+ 2. Write ```java MifGenerator mif_file_name.mif``` (this is your mif file).
 
  3. You will be asked what image do you want to insert and on which size
 
