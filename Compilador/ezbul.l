@@ -6,7 +6,7 @@
 			   correspondientes a cada palabra clave. */
 %}
 
-registro_esc	 	("R1"|"R2"|"R3"|"R4"|"R5"|"R6"|"R7"|"r1"|"r2"|"r3"|"r4"|"r5"|"r6"|"r7")
+registro_esc	 	("R0"|"R1"|"R2"|"R3"|"R4"|"R5"|"R6"|"R7"|"r0"|"r1"|"r2"|"r3"|"r4"|"r5"|"r6"|"r7")
 registro_vect		("R8"|"R9"|"R10"|"R11"|"R12"|"R13"|"R14"|"R15"|"r8"|"r9"|"r10"|"r11"|"r12"|"r13"|"r14"|"r15")
 num			({numd}|{numh})
 numd			([0-9])+
@@ -29,6 +29,7 @@ numh			"0x"([0-9A-F])+
 ("LDV"|"ldv")			{yyless(3); return INSTR_LDV;}
 ("STV"|"stv")			{yyless(3); return INSTR_STV;}
 ("AND"|"and")			{yyless(3); return INSTR_AND;}
+("ANDV"|"andv")			{yyless(4); return INSTR_ANDV;}
 
 {registro_esc}			{yylval.string = (char *) strdup(yytext); return REGISTER;}
 {registro_vect}			{yylval.string = (char *) strdup(yytext); return REGISTER_VECT;}

@@ -55,6 +55,7 @@ int inst = 0x00000000;		// Representación númerica de instrucción actual
 %token INSTR_LDV
 %token INSTR_STV
 %token INSTR_AND
+%token INSTR_ANDV
 
 %%
 
@@ -90,7 +91,7 @@ immediate:
 	;	
 
 mem_mode: 
-	'[' reg_n_vect ',' Src_vect ']'					
+	'[' reg_n ',' Src ']'					
 	;
 
 reg_d: 
@@ -123,6 +124,7 @@ instruction:
 	| instr_ldv						{inst = inst | 0x0B000000;}
 	| instr_stv						{inst = inst | 0x0B400000;}
 	| instr_and						{inst = inst | 0x00400000;}
+	| instr_andv						{inst = inst | 0x08400000;}
 	;
 
 instr_nop: 
@@ -175,6 +177,10 @@ instr_stv:
 
 instr_and: 
 	INSTR_AND reg_d ',' reg_n ',' Src
+	;
+
+instr_andv: 
+	INSTR_ANDV reg_d_vect ',' reg_n_vect ',' Src_vect
 	;
 
 %%
